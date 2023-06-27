@@ -40,7 +40,3 @@ resource "azurerm_resource_group" "dp_rg" {
   tags     = local.tags
 }
 
-data "databricks_spark_version" "latest_lts" {
-  long_term_support = true
-  depends_on        = [azurerm_databricks_workspace.example]
-}
