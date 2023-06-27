@@ -34,7 +34,7 @@ locals {
   }
 }
 
-resource "azurerm_resource_group" "this" {
+resource "azurerm_resource_group" "dp_rg" {
   name     = "adb-dp-${local.prefix}-rg"
   location = var.location
   tags     = local.tags

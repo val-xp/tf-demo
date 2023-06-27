@@ -1,7 +1,7 @@
 resource "azurerm_databricks_workspace" "example" {
   name                                  = "${local.prefix}-dp-workspace"
-  resource_group_name                   = azurerm_resource_group.this.name
-  location                              = azurerm_resource_group.this.location
+  resource_group_name                   = azurerm_resource_group.dp_rg.name
+  location                              = azurerm_resource_group.dp_rg.location
   sku                                   = "standard"
 
   tags = local.tags
