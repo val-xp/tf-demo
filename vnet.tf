@@ -58,3 +58,9 @@ resource "azurerm_subnet_network_security_group_association" "private" {
   subnet_id                 = azurerm_subnet.private.id
   network_security_group_id = azurerm_network_security_group.this.id
 }
+
+resource "azurerm_nat_gateway" "example" {
+  name                = "${local.prefix}-nat-gateway"
+  resource_group_name = azurerm_resource_group.dp_rg.name
+  location            = azurerm_resource_group.dp_rg.location
+}

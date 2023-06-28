@@ -1,0 +1,3 @@
+location     = "uksouth"
+nameprefix   = "your-name-prefix"
+cidr        = "10.179.0.0/20"

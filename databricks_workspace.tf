@@ -14,6 +14,7 @@ resource "azurerm_databricks_workspace" "example" {
     public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
     private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
     storage_account_name                                 = local.dbfsname
+    nat_gateway_name                                     = azurerm_nat_gateway.example.name
   }
   # We need this, otherwise destroy doesn't cleanup things correctly
   depends_on = [
