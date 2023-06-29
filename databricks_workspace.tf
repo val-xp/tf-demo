@@ -1,10 +1,12 @@
+
 resource "azurerm_databricks_workspace" "example" {
   name                                  = "${local.prefix}-dp-workspace"
   resource_group_name                   = azurerm_resource_group.dp_rg.name
   location                              = azurerm_resource_group.dp_rg.location
   sku                                   = "standard"
+  tags                                  = local.tags
 
-  tags = local.tags
+  network_security_group_rules_required = "NoAzureDatabricksRules" // backend private link
 
   custom_parameters {
     no_public_ip                                         = var.no_public_ip
