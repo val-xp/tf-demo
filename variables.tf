@@ -7,4 +7,19 @@ variable "nameprefix" {
   type        = string
   description = "(Required) string to be used as prefix in the name of rg and workspace"
 }
+
+variable "no_public_ip" {
+  type    = bool
+  default = true
+} 
+
+variable "workspace_prefix" {
+  type    = string
+  default = "adb"
+}
+
+variable "cidr" {
+  type    = string
+  default = "10.179.0.0/20"
+}
  
