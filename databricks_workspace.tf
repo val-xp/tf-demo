@@ -3,9 +3,9 @@ resource "azurerm_databricks_workspace" "example" {
   name                                  = "${local.prefix}-dp-workspace"
   resource_group_name                   = azurerm_resource_group.dp_rg.name
   location                              = azurerm_resource_group.dp_rg.location
-  sku                                   = "standard"
+  sku                                   = "premium" // need premium for private link
   tags                                  = local.tags
-
+  public_network_access_enabled         = true // false for frontend private link
   network_security_group_rules_required = "NoAzureDatabricksRules" // backend private link
 
   custom_parameters {

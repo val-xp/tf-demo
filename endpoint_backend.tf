@@ -2,7 +2,7 @@ resource "azurerm_private_endpoint" "dp_dpcp" {
   name                = "dpcppvtendpoint-dp"
   location            = var.location
   resource_group_name = azurerm_resource_group.dp_rg.name
-  subnet_id           = azurerm_subnet.public.id
+  subnet_id           = azurerm_subnet.dp_plsubnet.id
 
   private_service_connection {
     name                           = "ple-${local.prefix}-dp-dpcp"

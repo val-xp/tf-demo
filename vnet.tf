@@ -12,7 +12,6 @@ resource "azurerm_network_security_group" "this" {
   resource_group_name = azurerm_resource_group.dp_rg.name
   tags                = local.tags
 }
-
 resource "azurerm_network_security_rule" "dp_aad" {
   name                        = "AllowAAD-dp"
   priority                    = 200
