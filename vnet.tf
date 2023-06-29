@@ -24,7 +24,7 @@ resource "azurerm_network_security_rule" "dp_aad" {
   source_address_prefix       = "VirtualNetwork"
   destination_address_prefix  = "AzureActiveDirectory"
   resource_group_name         = azurerm_resource_group.dp_rg.name
-  network_security_group_name = azurerm_network_security_group.dp_sg.name
+  network_security_group_name = azurerm_network_security_group.this.name
 }
 
 resource "azurerm_network_security_rule" "dp_azfrontdoor" {
@@ -38,7 +38,7 @@ resource "azurerm_network_security_rule" "dp_azfrontdoor" {
   source_address_prefix       = "VirtualNetwork"
   destination_address_prefix  = "AzureFrontDoor.Frontend"
   resource_group_name         = azurerm_resource_group.dp_rg.name
-  network_security_group_name = azurerm_network_security_group.dp_sg.name
+  network_security_group_name = azurerm_network_security_group.this.name
 }
 
 resource "azurerm_subnet" "public" {
@@ -100,7 +100,7 @@ resource "azurerm_subnet" "dp_plsubnet" {
   name                                           = "${local.prefix}-dp-privatelink"
   resource_group_name                            = azurerm_resource_group.dp_rg.name
   virtual_network_name                           = azurerm_virtual_network.this.name
-  address_prefixes                               = [cidrsubnet(var.cidr_dp, 6, 2)]
+  address_prefixes                               = [cidrsubnet(var.cidr, 3, 2)]
   enforce_private_link_endpoint_network_policies = true
 } 
 
