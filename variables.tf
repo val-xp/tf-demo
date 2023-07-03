@@ -22,4 +22,8 @@ variable "cidr" {
   type    = string
   default = "10.179.0.0/20"
 }
+
+variable "allowed_ips_list" {
+  type    = list
+}
  

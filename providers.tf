@@ -8,4 +8,5 @@ provider "random" {
 
 provider "databricks" {
   host = azurerm_databricks_workspace.example.workspace_url
+  // alternative way to link provider to ws: azure_workspace_resource_id = azurerm_databricks_workspace.example.id
 }
