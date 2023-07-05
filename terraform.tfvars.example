@@ -1,3 +1,4 @@
 location     = "uksouth"
 nameprefix   = "your-name-prefix"
 cidr        = "10.179.0.0/20"
+allowed_ips_list = ["<a public ip>",  "<range of ips for vpn>/22"]

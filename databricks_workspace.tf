@@ -25,5 +25,17 @@ resource "azurerm_databricks_workspace" "example" {
   ]
 }
 
+resource "databricks_workspace_conf" "this" {
+  custom_config = {
+    "enableIpAccessLists" = true
+  }
+}
+
+resource "databricks_ip_access_list" "ip-list" {
+  label     = "ip-list"
+  list_type = "ALLOW"  // ALLOW (allow list) or BLOCK (block list)
+  ip_addresses = var.allowed_ips_list
+  depends_on = [databricks_workspace_conf.this]
+}
 
 
