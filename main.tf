@@ -12,6 +12,7 @@ terraform {
 }
 
 resource "random_string" "naming" {
+  // random string for naming (i.e. used in dbfs name)
   special = false
   upper   = false
   length  = 6

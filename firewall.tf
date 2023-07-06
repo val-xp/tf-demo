@@ -74,7 +74,7 @@ resource "azurerm_firewall_application_rule_collection" "adbfqdn" {
 }
 
 resource "azurerm_route_table" "adbroute" {
-  //route all traffic from spoke vnet to hub vnet
+  //route all traffic to internet from custumer VNet
   name                = "spoke-routetable"
   location            = azurerm_resource_group.dp_rg.location
   resource_group_name = azurerm_resource_group.dp_rg.name
