@@ -13,6 +13,7 @@ resource "azurerm_private_endpoint" "dp_dbfspe" {
 
   private_dns_zone_group {
     name                 = "private-dns-zone-dbfs"
-    private_dns_zone_ids = [azurerm_private_dns_zone.dnsdbfs.id]
+    private_dns_zone_ids = [azurerm_private_dns_zone.dnsdbfsblob.id
+    ]
   }
 }

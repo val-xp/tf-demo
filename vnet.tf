@@ -100,3 +100,11 @@ resource "azurerm_subnet_nat_gateway_association" "nat_subnet_assc_pr" {
   nat_gateway_id        = module.nat_gateway.nat_gateway_id
   depends_on            = [module.nat_gateway]
 }
+
+resource "azurerm_subnet" "hubfw" {
+  //name must be fixed as AzureFirewallSubnet
+  name                 = "AzureFirewallSubnet"
+  resource_group_name  = azurerm_resource_group.dp_rg.name
+  virtual_network_name = azurerm_virtual_network.this.name
+  address_prefixes     = [cidrsubnet(var.cidr, 3, 3)]
+}
