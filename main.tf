@@ -26,7 +26,6 @@ locals {
   // dltp - databricks labs terraform provider
   prefix   = join("-", ["tfdemo", var.nameprefix])
   dbfsname = join("", ["dbfs", "${random_string.naming.result}"]) // dbfs name must not have special chars
-  nat_gateway_name = "${local.prefix}-nat-gateway"
   
   // tags that are propagated down to all resources
   tags = {

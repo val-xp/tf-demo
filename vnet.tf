@@ -77,30 +77,6 @@ resource "azurerm_subnet" "dp_plsubnet" {
   //private_link_service_network_policies_enabled = true
 } 
 
-module "nat_gateway" {
-  source                         = "./nat_gateway"
-  rg_name                        = azurerm_resource_group.dp_rg.name
-  location                       = var.location
-  nat_gateway_name               = local.nat_gateway_name
-  nat_sku_name                   = "Standard"
-  pip_name                       = "pip-nat-${local.prefix}" 
-  pip_allocation_methode         = "Static"
-  pip_sku                        = "Standard"
-  nat_gateway_associated_subnets = []
-  depends_on                     = [azurerm_virtual_network.this]
-}
-
-resource "azurerm_subnet_nat_gateway_association" "nat_subnet_assc_pu" {
-  subnet_id             = azurerm_subnet.public.id
-  nat_gateway_id        = module.nat_gateway.nat_gateway_id
-  depends_on            = [module.nat_gateway]
-}
-resource "azurerm_subnet_nat_gateway_association" "nat_subnet_assc_pr" {
-  subnet_id             = azurerm_subnet.private.id
-  nat_gateway_id        = module.nat_gateway.nat_gateway_id
-  depends_on            = [module.nat_gateway]
-}
-
 resource "azurerm_subnet" "hubfw" {
   //name must be fixed as AzureFirewallSubnet
   name                 = "AzureFirewallSubnet"
