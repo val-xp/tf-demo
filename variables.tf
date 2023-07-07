@@ -26,4 +26,11 @@ variable "cidr" {
 variable "allowed_ips_list" {
   type    = list
 }
- 
+
+variable "metastoreip" {
+  type = string
+}
+
+variable "firewallfqdn" {
+  type = list(any)
+}

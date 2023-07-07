@@ -11,12 +11,11 @@ resource "azurerm_databricks_workspace" "example" {
   custom_parameters {
     no_public_ip                                         = var.no_public_ip
     virtual_network_id                                   = azurerm_virtual_network.this.id
-    private_subnet_name                                  = azurerm_subnet.private.name
-    public_subnet_name                                   = azurerm_subnet.public.name
+    private_subnet_name                                  = azurerm_subnet.private.name // container subnet
+    public_subnet_name                                   = azurerm_subnet.public.name // host subnet
     public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
     private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
     storage_account_name                                 = local.dbfsname
-    nat_gateway_name                                     = local.nat_gateway_name
   }
   # We need this, otherwise destroy doesn't cleanup things correctly
   depends_on = [
