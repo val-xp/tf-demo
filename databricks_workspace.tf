@@ -7,6 +7,10 @@ resource "azurerm_databricks_workspace" "example" {
   tags                                  = local.tags
   public_network_access_enabled         = true // false for frontend private link
   network_security_group_rules_required = "NoAzureDatabricksRules" // backend private link
+  customer_managed_key_enabled          = true
+  managed_services_cmk_key_vault_key_id = var.service_cmk_key
+  managed_disk_cmk_key_vault_key_id     = var.disk_cmk_key
+  infrastructure_encryption_enabled     = true
 
   custom_parameters {
     no_public_ip                                         = var.no_public_ip
@@ -27,6 +31,7 @@ resource "azurerm_databricks_workspace" "example" {
 resource "databricks_workspace_conf" "this" {
   custom_config = {
     "enableIpAccessLists" = true
+    "enableTokensConfig" = true  
   }
 }
 
@@ -37,4 +42,7 @@ resource "databricks_ip_access_list" "ip-list" {
   depends_on = [databricks_workspace_conf.this]
 }
 
-
+// Example to add a service principle to the workspace
+resource "databricks_service_principal" "sp" {
+  application_id = var.sp_application_id
+}

@@ -34,3 +34,15 @@ variable "metastoreip" {
 variable "firewallfqdn" {
   type = list(any)
 }
+
+variable "sp_application_id" {
+  type = string
+}
+
+variable "service_cmk_key" {
+  type = string
+}
+
+variable "disk_cmk_key" {
+  type = string
+}
