@@ -39,18 +39,3 @@ variable "sp_application_id" {
   type = string
 }
 
-variable "service_cmk_key" {
-  type = string
-}
-
-variable "disk_cmk_key" {
-  type = string
-}
-
-variable "key_vault_id" {
-  type = string
-}
-
-variable "key_vault_uri" {
-  type = string
-}

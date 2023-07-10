@@ -8,8 +8,8 @@ resource "azurerm_databricks_workspace" "example" {
   public_network_access_enabled         = true // false for frontend private link
   network_security_group_rules_required = "NoAzureDatabricksRules" // backend private link
   customer_managed_key_enabled          = true
-  managed_services_cmk_key_vault_key_id = var.service_cmk_key
-  managed_disk_cmk_key_vault_key_id     = var.disk_cmk_key
+  managed_services_cmk_key_vault_key_id = azurerm_key_vault_key.service.id  
+  managed_disk_cmk_key_vault_key_id     = azurerm_key_vault_key.disk.id   
   infrastructure_encryption_enabled     = true
 
   custom_parameters {
@@ -54,17 +54,4 @@ resource "databricks_secret_scope" "kv" {
     resource_id = azurerm_key_vault.this.id
     dns_name    = azurerm_key_vault.this.vault_uri
   }
-}
-
-
-resource "azurerm_key_vault_access_policy" "mdisks" {
-  depends_on = [azurerm_databricks_workspace.example]
-  key_vault_id = var.key_vault_id
-  tenant_id    = azurerm_databricks_workspace.example.managed_disk_identity.0.tenant_id
-  object_id    = azurerm_databricks_workspace.example.managed_disk_identity.0.principal_id
-  key_permissions = [
-    "Get",
-    "UnwrapKey",
-    "WrapKey",
-  ]
 }
