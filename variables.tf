@@ -46,3 +46,11 @@ variable "service_cmk_key" {
 variable "disk_cmk_key" {
   type = string
 }
+
+variable "key_vault_id" {
+  type = string
+}
+
+variable "key_vault_uri" {
+  type = string
+}

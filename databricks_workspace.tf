@@ -24,7 +24,7 @@ resource "azurerm_databricks_workspace" "example" {
   # We need this, otherwise destroy doesn't cleanup things correctly
   depends_on = [
     azurerm_subnet_network_security_group_association.public,
-    azurerm_subnet_network_security_group_association.private
+    azurerm_subnet_network_security_group_association.private,
   ]
 }
 
@@ -45,4 +45,26 @@ resource "databricks_ip_access_list" "ip-list" {
 // Example to add a service principle to the workspace
 resource "databricks_service_principal" "sp" {
   application_id = var.sp_application_id
+}
+
+resource "databricks_secret_scope" "kv" {
+  name = "keyvault-managed"
+
+  keyvault_metadata {
+    resource_id = azurerm_key_vault.this.id
+    dns_name    = azurerm_key_vault.this.vault_uri
+  }
+}
+
+
+resource "azurerm_key_vault_access_policy" "mdisks" {
+  depends_on = [azurerm_databricks_workspace.example]
+  key_vault_id = var.key_vault_id
+  tenant_id    = azurerm_databricks_workspace.example.managed_disk_identity.0.tenant_id
+  object_id    = azurerm_databricks_workspace.example.managed_disk_identity.0.principal_id
+  key_permissions = [
+    "Get",
+    "UnwrapKey",
+    "WrapKey",
+  ]
 }

@@ -1,4 +1,18 @@
 location     = "uksouth"
-nameprefix   = "your-name-prefix"
-cidr        = "10.179.0.0/20"
-allowed_ips_list = ["<a public ip>",  "<range of ips for vpn>/22"]
+nameprefix   = " YOUR NAMING PREFIX "
+cidr         = "10.179.0.0/20"
+allowed_ips_list = ["0.0.0.0/0"]
+metastoreip = "51.105.64.0"
+firewallfqdn = [                                               // we don't need scc relay and dbfs fqdn since they will go to private endpoint
+  "dbartifactsproduksouth.blob.core.windows.net",              //databricks artifacts
+  "dbartifactsprodukwest.blob.core.windows.net",               //databricks artifacts secondary
+  "dblogprodukwest.blob.core.windows.net",                     //log blob
+  "prod-ukwest-observabilityeventhubs.servicebus.windows.net", //eventhub
+  "cdnjs.com",                                                 //ganglia
+  "ipinfo.io"                                                  // ip info
+]
+sp_application_id = "< AN EXISTING SERVICE PRINCIPAL APPLICATION ID>"
+service_cmk_key = "https://<key vault id>.vault.azure.net/keys/disk-key/<your secret id>"
+disk_cmk_key = "https://<key vault id>.vault.azure.net/keys/disk-key/<your secret id>"
+key_vault_uri = "https://<key vault id>.vault.azure.net/"
+key_vault_id = "<key vault id>"

@@ -12,6 +12,7 @@ resource "azurerm_firewall" "hubfw" {
   resource_group_name = azurerm_resource_group.dp_rg.name
   sku_name            = "AZFW_VNet"
   sku_tier            = "Standard"
+  threat_intel_mode   = "Deny"
 
   ip_configuration {
     name                 = "configuration"
