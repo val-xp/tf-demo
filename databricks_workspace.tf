@@ -47,6 +47,7 @@ resource "databricks_service_principal" "sp" {
   application_id = var.sp_application_id
 }
 
+// databricks secret scope with secrets saved in Azure key vault
 resource "databricks_secret_scope" "kv" {
   name = "keyvault-managed"
 
@@ -56,7 +57,7 @@ resource "databricks_secret_scope" "kv" {
   }
 }
 
-
+// grant disks to the azure key vault with CMK (customer managed keys)
 resource "azurerm_key_vault_access_policy" "mdisks" {
   depends_on = [azurerm_databricks_workspace.example]
   key_vault_id = var.key_vault_id

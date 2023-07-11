@@ -12,7 +12,7 @@ firewallfqdn = [                                               // we don't need 
   "ipinfo.io"                                                  // ip info
 ]
 sp_application_id = "< AN EXISTING SERVICE PRINCIPAL APPLICATION ID>"
-service_cmk_key = "https://<key vault id>.vault.azure.net/keys/disk-key/<your secret id>"
+service_cmk_key = "https://<key vault id>.vault.azure.net/keys/service-key/<your secret id>"
 disk_cmk_key = "https://<key vault id>.vault.azure.net/keys/disk-key/<your secret id>"
 key_vault_uri = "https://<key vault id>.vault.azure.net/"
 key_vault_id = "<key vault id>"

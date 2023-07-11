@@ -1,6 +1,7 @@
 data "azurerm_client_config" "current" {
 }
 
+// key vault used as backend for a Databricks secret scope
 resource "azurerm_key_vault" "this" {
   name                     = "${local.prefix}-kv"
   location                 = azurerm_resource_group.dp_rg.location
@@ -12,6 +13,7 @@ resource "azurerm_key_vault" "this" {
   sku_name                 = "standard"
 }
 
+// current user (the user launching terraform command) access to key vault secrets and keys
 resource "azurerm_key_vault_access_policy" "this" {
   key_vault_id       = azurerm_key_vault.this.id
   tenant_id          = data.azurerm_client_config.current.tenant_id
